@@ -1,2 +1,2 @@
-# wolves-coin-tracker
+# Wolf-financing
 Stock and investements tracking
