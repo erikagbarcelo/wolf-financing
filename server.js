@@ -3,6 +3,9 @@ const express = require('express');
 //import connection to the database
 const sequelize = require('./config/connection')
 
+// Check code
+// require('./models')
+
 // set up the Express app
 const app = express();
 const PORT = process.env.PORT || 3001;
