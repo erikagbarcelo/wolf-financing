@@ -50,10 +50,11 @@ Users.init(
         zip: {
             type: DataTypes.INTEGER,
             allowNull: false,
-            validate: {
-                min: 5,
-                max: 5
-            }
+            // Validation causing errors need to restrict to 5 digits.
+            // validate: {
+            //     min: 5,
+            //     max: 5
+            // }
         }
     }, 
     {
