@@ -2,7 +2,7 @@ const router = require('express').Router();
 // import our db connection for the SQL
 const sequelize = require('../../config/connection');
 // const { VestedStocks } = require('../../models');
-const {Users} = require('../../models')/
+const { Users } = require('../../models');
 /* Create
 Route to signup a new ueser
 Post method with endpoint '/api/users/'
@@ -37,21 +37,37 @@ router.post('/', async (req, res) => {
     }
 });
 
-// router.get('/', async (req, res) => {
-//     try {
-//         const users = await Users.findAll({
-//             attributes: {
-//                 exclude: ['password'],
-//                 include: [
-//                     sequelize.leteral('(SELECT COUNT(*) FROM vestedstocks WHERE vestedstocks.userId = users.id)'), 'vestedStocksCount',
-//                 ]
-//             },
-//         });
-//         res.status(201).json(users) // 201 - Created
-//     } catch (error) {
-//         console.log(error);
-//         res.status(500).json(error) // 500 - internal server error
-//     }
-// });
+/* READ - Optional?
+Route to retrieve all users
+GET method with endpoint '/api/users/'
+*/
+router.get('/', async (req, res) => {
+    try {
+        const users = await Users.findAll(
+        //     {
+        //     attributes: {
+        //         exclude: ['password'],
+        //         include: [
+        //             sequelize.literal('(SELECT COUNT(*) FROM vestedstocks WHERE vestedstocks.userId = users.id)'), 'vestedStocksCount',
+        //         ]
+        //     },
+        // }
+        );
+        res.status(200).json(users) // 200 - Ok
+    } catch (error) {
+        console.log(error);
+        res.status(500).json(error) // 500 - internal server error
+    }
+});
+
+router.get('/:userId', async (req, res) => {
+   try {
+    const user = await Users.findByPK(req.params.userId);
+    res.status(200).json(users) // 200 - Ok
+} catch (error) {
+    console.log(error);
+    res.status(500).json(error) // 500 - internal server error
+} 
+})
 
 module.exports = router;

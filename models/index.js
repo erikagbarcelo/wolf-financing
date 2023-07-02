@@ -20,4 +20,4 @@ VestedStocks.belongsTo(Stocks, {
     foreignKey: 'stockTicker'
 })
 
-module.exports = {Users, VestedStocks, Stocks}
+module.exports = {Users, VestedStocks, Stocks};
