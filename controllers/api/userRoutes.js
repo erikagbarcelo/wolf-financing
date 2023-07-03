@@ -46,7 +46,7 @@ GET method with endpoint '/api/users/'
 router.get('/', async (req, res) => {
     try {
         const users = await Users.findAll(
-
+        // Reference tech-blog-v1.0, pt2 timestamp 1:25:00
         // ***** ERROR HERE *****
         // Suspect that seed file is fake data and unique user info doesn't coinside with vestedstocks.
         //     {
@@ -69,8 +69,8 @@ router.get('/', async (req, res) => {
 router.get('/:userId', async (req, res) => {
    try {
     const user = await Users.findByPk(req.params.userId, {
-        // tech-blog-v1.0, pt2 timestamp 45min
-
+        // Reference tech-blog-v1.0, pt2 timestamp 45min
+        // Reference tech-blog-v1.0, pt2 timestamp 1:25:00
         // Will need to clean the data for this to work
         // include: [{ model: VestedStocks}, { model: Stocks }],
         attributes: {
