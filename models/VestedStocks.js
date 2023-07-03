@@ -12,6 +12,10 @@ VestedStocks.init(
             primaryKey: true,
             autoIncrement: true
         },
+        nShares: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+        },
         stockTicker: {
             type: DataTypes.STRING,
             references: {
