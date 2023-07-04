@@ -7,7 +7,7 @@ const { Users, Stocks } = require('../../models');
 router.get('/', async (req, res) => {
     try {
         const stocks = await Stocks.findAll({
-            /*
+            /* FIXME
             include: [{  model: Users, attributes: ['username']}],
             attributes: {
                 include: [

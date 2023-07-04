@@ -1,9 +1,10 @@
 const router = require('express').Router();
 // import our db connection for the SQL
 const sequelize = require('../../config/connection');
-// const { VestedStocks } = require('../../models');
 const { Stocks } = require('../../models');
+const withAuth = require('../../utils/auth');
 
+// FIXME: Will need updated after final ERD, Reference tech-blog-v1.0, pt3 timestamp 1:11min
 /* Create
 Route to signup a new ueser
 Post method with endpoint '/api/users/'
@@ -15,6 +16,7 @@ Test with: {"ticker": "F",
 "midYearHigh": 16.50,
 "midYearLow": 10.50}
 */
+// TODO: Only authenticated users can create a post
 router.post('/', async (req, res) => {
     console.log('req.body:', req.body)
     try {
@@ -45,17 +47,17 @@ router.get('/', async (req, res) => {
         const stocks = await Stocks.findAll(
         // Reference tech-blog-v1.0, pt2 timestamp 45min
         // Reference tech-blog-v1.0, pt2 timestamp 1:25:00
-        // ***** ERROR HERE *****
-        // Suspect that seed file is fake data and unique user info doesn't coinside with vestedstocks.
-        //     {
-        //     attributes: {
-        //         exclude: ['password'],
-        //         include: [
-        //             sequelize.literal('(SELECT COUNT(*) FROM vestedstocks WHERE vestedstocks.userId = users.id)'), 'vestedStocksCount',
-        //         ]
-        //     },
-        // }
-
+/*        FIXME: Will need updated after ERD finalized
+        Suspect that seed file is fake data and unique user info doesn't coinside with vestedstocks.
+            {
+            attributes: {
+                exclude: ['password'],
+                include: [
+                    sequelize.literal('(SELECT COUNT(*) FROM vestedstocks WHERE vestedstocks.userId = users.id)'), 'vestedStocksCount',
+                ]
+            },
+        }
+*/
         );
         res.status(200).json(stocks) // 200 - Ok
     } catch (error) {

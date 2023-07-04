@@ -7,6 +7,7 @@ Route to signup a new ueser
 Post method with endpoint '/api/users/'
 Test with: {"stockTicker": "F", "nShares": 10, "userId": 10}
 */
+// FIXME: Will need updated after final ERD, Reference tech-blog-v1.0, pt3 timestamp 1:11min
 // TODO: Only authenticated users can create a vested stock
 router.post('/', async (req, res) => {
     try {
