@@ -3,6 +3,7 @@ const router = require('express').Router();
 const sequelize = require('../../config/connection');
 const { Stocks } = require('../../models');
 const withAuth = require('../../utils/auth');
+const API_KEY = process.env.API_KEY;
 
 // FIXME: Will need updated after final ERD, Reference tech-blog-v1.0, pt3 timestamp 1:11min
 /* Create
@@ -16,9 +17,34 @@ Test with: {"ticker": "F",
 "midYearHigh": 16.50,
 "midYearLow": 10.50}
 */
-// TODO: Only authenticated users can create a post
+// TODO: Only authenticated users can create a db of their stocks owned
 router.post('/', async (req, res) => {
-    console.log('req.body:', req.body)
+  
+    // ********** Polygon API **************
+    /*
+    User will input a Ticker they own and this will create the database of info for specified ticker owned.
+    This will more than likely after to loop through the tickers owned by an individual.     
+    */
+
+    const ticker = req.body.ticker; 
+
+    // To sample of data pulled
+    // curl https://api.polygon.io/v2/aggs/ticker/F/range/1/day/2023-01-09/2023-01-09?apiKey=gtCLIGpsLEVTMKeT4XV9rZcX7ivq3M79
+    const requestUrl = `https://api.polygon.io/v2/aggs/ticker/${ticker}/range/1/day/2023-01-09/2023-01-09?apiKey=${API_KEY}`;
+
+
+        fetch(requestUrl)
+        .then((result) => {return result.json()})
+        .then((data) => {
+            let ticker = data[i].ticker;
+            let openPrice = data[i].results.o; // Trying to get the Open price
+            console.log(`***The ticker, ${ticker} open at $${openPrice} today.***`)
+        })
+
+    // ********** Polygon API **************
+
+    // console.log('req.body:', req.body)
+
     try {
         const newStock = await Stocks.create({
             ticker: req.body.ticker, 
