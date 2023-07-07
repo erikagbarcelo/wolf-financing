@@ -3,19 +3,14 @@ const router = require('express').Router();
 const sequelize = require('../../config/connection');
 const { Stocks } = require('../../models');
 const withAuth = require('../../utils/auth');
+const axios = require('axios');
 const API_KEY = process.env.API_KEY;
 
 // FIXME: Will need updated after final ERD, Reference tech-blog-v1.0, pt3 timestamp 1:11min
 /* Create
 Route to signup a new ueser
-Post method with endpoint '/api/users/'
-Test with: {"ticker": "F", 
-"company": "Ford", 
-"median": 13.00, 
-"todayHigh": 14.50,
-"todayLow": 12.50,
-"midYearHigh": 16.50,
-"midYearLow": 10.50}
+Post method with endpoint '/api/stocks/'
+Test with: {"ticker": "F"}
 */
 // TODO: Only authenticated users can create a db of their stocks owned
 router.post('/', async (req, res) => {
@@ -27,40 +22,40 @@ router.post('/', async (req, res) => {
     */
 
     const ticker = req.body.ticker; 
-
+    console.log(ticker)
     // To sample of data pulled
     // curl https://api.polygon.io/v2/aggs/ticker/F/range/1/day/2023-01-09/2023-01-09?apiKey=gtCLIGpsLEVTMKeT4XV9rZcX7ivq3M79
     const requestUrl = `https://api.polygon.io/v2/aggs/ticker/${ticker}/range/1/day/2023-01-09/2023-01-09?apiKey=${API_KEY}`;
+    // const requestUrl = `https://api.polygon.io/v3/reference/exchanges?asset_class=stocks&locale=us&apiKey=${API_KEY}`;
 
+    
+    const result = await axios.get(requestUrl)
 
-        fetch(requestUrl)
-        .then((result) => {return result.json()})
-        .then((data) => {
-            let ticker = data[i].ticker;
-            let openPrice = data[i].results.o; // Trying to get the Open price
-            console.log(`***The ticker, ${ticker} open at $${openPrice} today.***`)
-        })
-
+    const stockInfo = result.data.results[0]
+    console.log(stockInfo)
+    res.end()
+  
     // ********** Polygon API **************
 
     // console.log('req.body:', req.body)
 
     try {
         const newStock = await Stocks.create({
-            ticker: req.body.ticker, 
-            company: req.body.company, 
-            median: req.body.median, 
-            todayHigh: req.body.todayHigh,
-            todayLow: req.body.todayLow,
-            midYearHigh: req.body.midYearHigh,
-            midYearLow: req.body.midYearLow,
+            ticker: req.body.ticker,
+            open: stockInfo.o,
+            close: stockInfo.c,
+            lowestPrice: stockInfo.l,
+            highestPrice: stockInfo.h
         });
         // TODO: modify session object to include user information and loggedIn boolean
-        res.status(201).json(newStock) // 201 - Created
+        // res.status(201).json(newStock) // 201 - Created
+        res.status(201).end() // 201 - Created
     } 
     catch (error) {
         console.log(error);
-        res.status(500).json(error) // 500 - internal server error
+        // TODO: Ask Instructor Why the error .json. (Assumption that we are returning an array.)
+        // res.status(500).json(error) // 500 - internal server error
+        res.status(500).end() // 500 - internal server error
     }
 });
 
