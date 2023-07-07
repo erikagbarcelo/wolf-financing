@@ -1,6 +1,9 @@
 // import express 
 const express = require('express');
-
+// import handlebars
+const handlebars = require('express-handlebars')
+const hbs = handlebars.create()
+const path = require('path');
 // import express-session
 const session = require('express-session');
 // import SequelizeStore constructor
@@ -10,7 +13,6 @@ const sequelize = require('./config/connection');
 
 // import our routes
 const routes = require('./controllers');
-
 
 // set up the Express app
 const app = express();
@@ -43,9 +45,13 @@ const sess = {
 // Mount session middleware
 app.use(session(sess));
 
+app.engine('handlebars', hbs.engine);
+app.set('view engine', 'handlebars');
+
 // set up middleware to parse requests
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
+app.use(express.static(path.join(__dirname, 'public')))
 
 // mount the routes
 app.use(routes);

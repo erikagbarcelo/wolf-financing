@@ -38,10 +38,10 @@ router.get('/', async (req, res) => {
         
         const serializedStocks = stocks.map(stock => stock.get({ plain: true }));
         
-        console.log(stocks);
+        console.log(serializedStocks);
 
         // TODO: Modify response with actual View Template
-        res.status(200).send('<h1>HOMEPAGE</h1><h2>Render the homepage view along with all posts retrieved.</h2>')
+        res.status(200).render('homepage', { stocks: serializedStocks })
     } catch (error) {
         console.log(error);
         res.status(500).json(error);
