@@ -1,9 +1,14 @@
 const {Model, DataTypes} = require('sequelize');
 const sequelize = require('../config/connection');
 
-class User extends Model {}
+const bcrypt = require('bcrypt');
 
-User.init(
+class Users extends Model {checkPassword(loginPw) {
+    return bcrypt.compareSync(loginPw, this.password);
+  }}
+
+Users.init(
+
     {
         // List of fields
         id: {
@@ -32,17 +37,48 @@ User.init(
             type: DataTypes.STRING,
             allowNull: false
         },
-        Address: {
+        address: {
             type: DataTypes.STRING,
             allowNull: false
+        },
+        city: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        state: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        zip: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            // Validation causing errors need to restrict to 5 digits.
+            // validate: {
+            //     min: 5,
+            //     max: 5
+            // }
+
         }
     }, 
     {
         sequelize: sequelize,
         timestamps: false,
         freezeTableName: true,
-        modelName: 'user',
+
+        modelName: 'users',
+        hooks: {
+            beforeCreate: async (newUserData) => {
+              newUserData.password = await bcrypt.hash(newUserData.password, 10);
+              return newUserData;
+            },
+            beforeUpdate: async (updatedUserData) => {
+              updatedUserData.password = await bcrypt.hash(updatedUserData.password, 10);
+              return updatedUserData;
+            },
+          },
     }
+    
 )
 
-module.exports = User;
+module.exports = Users;
+
