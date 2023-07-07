@@ -1,5 +1,6 @@
 const {Model, DataTypes} = require('sequelize');
 const sequelize = require('../config/connection');
+
 const bcrypt = require('bcrypt');
 
 class Users extends Model {checkPassword(loginPw) {
@@ -7,6 +8,7 @@ class Users extends Model {checkPassword(loginPw) {
   }}
 
 Users.init(
+
     {
         // List of fields
         id: {
@@ -55,12 +57,14 @@ Users.init(
             //     min: 5,
             //     max: 5
             // }
+
         }
     }, 
     {
         sequelize: sequelize,
         timestamps: false,
         freezeTableName: true,
+
         modelName: 'users',
         hooks: {
             beforeCreate: async (newUserData) => {
@@ -77,3 +81,4 @@ Users.init(
 )
 
 module.exports = Users;
+

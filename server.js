@@ -1,5 +1,6 @@
 // import express 
 const express = require('express');
+
 // import express-session
 const session = require('express-session');
 // import SequelizeStore constructor
@@ -10,9 +11,11 @@ const sequelize = require('./config/connection');
 // import our routes
 const routes = require('./controllers');
 
+
 // set up the Express app
 const app = express();
 const PORT = process.env.PORT || 3001;
+
 
 // Configure session object
 const sess = {
@@ -52,5 +55,6 @@ express server */
 sequelize.sync({force: false}).then(() => {
     app.listen(PORT, () => {
         console.log(`App listening on port http://localhost:${PORT}`)
+
     })
 });
