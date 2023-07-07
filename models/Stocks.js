@@ -3,6 +3,7 @@ const sequelize = require('../config/connection');
 
 class Stocks extends Model {}
 
+// ICEBOX Ticker Search by company.
 Stocks.init(
     {
         // List of fields
@@ -12,32 +13,22 @@ Stocks.init(
             primaryKey: true,
             autoIncrement: false
         },
-        company: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            unique: true             
-        },
-        median: {
+        open: {
             type: DataTypes.FLOAT,
             allowNull: false,
             unique: false 
         },
-        todayHigh: {
+        close: {
             type: DataTypes.FLOAT,
             allowNull: false,
             unique: false 
         },
-        todayLow: {
+        lowestPrice: {
             type: DataTypes.FLOAT,
             allowNull: false,
             unique: false 
         },
-        midYearHigh: {
-            type: DataTypes.FLOAT,
-            allowNull: false,
-            unique: false 
-        },
-        midYearLow: {
+        highestPrice: {
             type: DataTypes.FLOAT,
             allowNull: false,
             unique: false 

@@ -49,7 +49,7 @@ app.use(routes);
 
 /* connect to the database before starting the 
 express server */
-sequelize.sync().then(() => {
+sequelize.sync({force: false}).then(() => {
     app.listen(PORT, () => {
         console.log(`App listening on port http://localhost:${PORT}`)
     })
