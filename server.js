@@ -45,13 +45,14 @@ const sess = {
 // Mount session middleware
 app.use(session(sess));
 
+// Mount hdbs as the default template engine
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 
 // set up middleware to parse requests
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
-app.use(express.static(path.join(__dirname, 'public')))
+app.use(express.static(path.join(__dirname, 'public')));
 
 // mount the routes
 app.use(routes);

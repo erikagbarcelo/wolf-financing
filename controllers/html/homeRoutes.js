@@ -41,7 +41,10 @@ router.get('/', async (req, res) => {
         console.log(serializedStocks);
 
         // TODO: Modify response with actual View Template
-        res.status(200).render('homepage', { stocks: serializedStocks })
+        res.status(200).render('homepage', { 
+        stocks: serializedStocks, 
+        loggedIn: true,
+     });
     } catch (error) {
         console.log(error);
         res.status(500).json(error);
