@@ -1,0 +1,32 @@
+:root {
+    --roboto: 'Roboto', sans-serif;
+    --monoton: 'Monoton', cursive;
+    --dark: #2b2d42;
+    --mediumgray: #8D99AE;
+    --lightgray: #EDF2F4;
+    --red: #D90429;
+}
+
+/* main.handlebars */
+body {
+    background-color: var(--lightgray);
+    color: var(--dark);
+    font-family: var(--roboto);
+    background-image: url(../assets/bg.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+footer {
+    /* push footer to the bottom of the page */
+    margin-top: auto;
+}
+
+.navbar-custom .navbar-brand {
+    font-family: var(--monoton);
+    color: var(--dark);
+}
+
+.navbar-custom .navbar-brand:hover {
+    color: var(--red);
+}

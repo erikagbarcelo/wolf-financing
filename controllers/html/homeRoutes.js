@@ -38,10 +38,13 @@ router.get('/', async (req, res) => {
         
         const serializedStocks = stocks.map(stock => stock.get({ plain: true }));
         
-        console.log(stocks);
+        console.log(serializedStocks);
 
         // TODO: Modify response with actual View Template
-        res.status(200).send('<h1>HOMEPAGE</h1><h2>Render the homepage view along with all posts retrieved.</h2>')
+        res.status(200).render('homepage', { 
+        stocks: serializedStocks, 
+        loggedIn: req.session.loggedIn,
+     });
     } catch (error) {
         console.log(error);
         res.status(500).json(error);
@@ -77,13 +80,12 @@ router.get('/signup', async (req, res) => {
     // TODO: Redirect to dashboard if user is already logged in.
     // TODO: modify response with actual signup page
     res.status(200).send('<h1> Sign Up Page </h1> <h2> Render the signup view. </h2>');
-})
+});
 
 // Render login page Reference pt2 timestamp 2:54min
 router.get('/login', async (req, res) => {
-    // TODO: Redirect to dashboard if user is already logged in.
-    // TODO: modify response with actual signup page
-    res.status(200).send('<h1> Login Page </h1> <h2> Render the login view. </h2>');
-})
+    if (req.session.loggedIn) return res.status(200).redirect('/');
+    res.status(200).render('login');
+});
 
 module.exports = router;
