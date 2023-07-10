@@ -29,36 +29,18 @@ Users.init(
                 len: [8]
             }
         },
-        firstName: {
+        email: {
             type: DataTypes.STRING,
-            allowNull: false
-        },
-        lastName: {
-            type: DataTypes.STRING,
-            allowNull: false
-        },
-        address: {
-            type: DataTypes.STRING,
-            allowNull: false
-        },
-        city: {
-            type: DataTypes.STRING,
-            allowNull: false
-        },
-        state: {
-            type: DataTypes.STRING,
-            allowNull: false
-        },
-        zip: {
-            type: DataTypes.INTEGER,
             allowNull: false,
-            // Validation causing errors need to restrict to 5 digits.
-            // validate: {
-            //     min: 5,
-            //     max: 5
-            // }
-
-        }
+            unique: true,
+            validate: {
+                isEmail: true,
+            }
+        },
+        // lastName: {
+        //     type: DataTypes.STRING,
+        //     allowNull: false
+        // },
     }, 
     {
         sequelize: sequelize,

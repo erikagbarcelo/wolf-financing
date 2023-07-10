@@ -10,25 +10,15 @@ Route to signup a new ueser
 Post method with endpoint '/api/users/'
 Test with: {"username": "testUser",
             "password": "Password123",
-            "firstName": "Rodney",
-            "lastName": "Buller",
-            "address": "123 Radiator Springs",
-            "city": "Scottsdale",
-            "state": "Arizona",
-            "zip": "85251"}
+            "email": "rbuller@hotmail.com"}
 */
 router.post('/', async (req, res) => {
     // console.log('req.body:', req.body)
     try {
         const newUser = await Users.create({
-            username: req.body.username,
+            email: req.body.email,
             password: req.body.password,
-            firstName: req.body.firstName,
-            lastName: req.body.lastName,
-            address: req.body.address,
-            city: req.body.city,
-            state: req.body.state,
-            zip: req.body.zip,
+            email: req.body.email,
         });
         // save new session to database
         req.session.save(() => {
@@ -128,12 +118,7 @@ PUT method with endpoint '/api/users/profile'
 test with any and all of:
 {"username": "updatedTestUser",
 "password": "updatedPassword123",
-"firstName": "Rodney",
-"lastName": "Buller",
-"address": "123 Radiator Springs",
-"city": "Scottsdale",
-"state": "Arizona",
-"zip": "85251"}
+"email": "rbuller@yahoo.com"}
 */
 // TODO: Ask why this worked with updating just the username. Ref tech-blog-v1.0, pt3 timestamp 35:30min
 router.put('/profile', withAuth, async (req, res) => {
@@ -208,8 +193,8 @@ router.delete('/:userId', async (req, res) => {
 router.post('/login', async (req, res) => {
     try {
         const user = await Users.findOne({
-            where: { username: req.body.username }
-        })
+            where: { email: req.body.email }
+        });
 
         if (!user) return res.status(400).json({message: 'Credentials not valid.'}); // 400 - Bad Request
         // Instance methog defined in '/models/Users'
@@ -222,13 +207,13 @@ router.post('/login', async (req, res) => {
             req.session.userId = user.id;
             req.session.loggedIn = true;
             res.status(200).json(user); // 200 = Ok
-        })
+        });
     } catch (error) {
         console.log(error);
         res.status(500).json(error); // 500 - Internal error
     }
 
-})
+});
 
 // Route to logout an existing user
 // POST method with endpoint '/api/users/logout'

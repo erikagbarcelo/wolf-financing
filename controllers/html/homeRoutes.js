@@ -38,10 +38,17 @@ router.get('/', async (req, res) => {
         
         const serializedStocks = stocks.map(stock => stock.get({ plain: true }));
         
-        console.log(stocks);
+        console.log(serializedStocks);
 
         // TODO: Modify response with actual View Template
-        res.status(200).send('<h1>HOMEPAGE</h1><h2>Render the homepage view along with all posts retrieved.</h2>')
+<<<<<<< HEAD
+        res.status(200).render('homepage', { stocks: serializedStocks, loggedIn: req.session.loggedIn })
+=======
+        res.status(200).render('homepage', { 
+        stocks: serializedStocks, 
+        loggedIn: req.session.loggedIn,
+     });
+>>>>>>> 1bf731d375c271c00251dda9693510d2a35b7d59
     } catch (error) {
         console.log(error);
         res.status(500).json(error);
@@ -74,16 +81,27 @@ router.get('/:ticker', async (req, res) => {
 
 // Render signup page Reference pt2 timestamp 2:52min
 router.get('/signup', async (req, res) => {
-    // TODO: Redirect to dashboard if user is already logged in.
-    // TODO: modify response with actual signup page
-    res.status(200).send('<h1> Sign Up Page </h1> <h2> Render the signup view. </h2>');
+<<<<<<< HEAD
+	if (req.session.loggedIn) return res.status(200).redirect('/');
+	res.status(200).render('signup');
 })
 
 // Render login page Reference pt2 timestamp 2:54min
 router.get('/login', async (req, res) => {
+	if (req.session.loggedIn) return res.status(200).redirect('/');
+	res.status(200).render('login');
+})
+=======
     // TODO: Redirect to dashboard if user is already logged in.
     // TODO: modify response with actual signup page
-    res.status(200).send('<h1> Login Page </h1> <h2> Render the login view. </h2>');
-})
+    res.status(200).send('<h1> Sign Up Page </h1> <h2> Render the signup view. </h2>');
+});
+
+// Render login page Reference pt2 timestamp 2:54min
+router.get('/login', async (req, res) => {
+    if (req.session.loggedIn) return res.status(200).redirect('/');
+    res.status(200).render('login');
+});
+>>>>>>> 1bf731d375c271c00251dda9693510d2a35b7d59
 
 module.exports = router;
