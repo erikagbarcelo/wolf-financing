@@ -16,7 +16,7 @@ router.post('/', async (req, res) => {
     // console.log('req.body:', req.body)
     try {
         const newUser = await Users.create({
-            username: req.body.username,
+            email: req.body.email,
             password: req.body.password,
             email: req.body.email,
         });
@@ -194,7 +194,11 @@ router.post('/login', async (req, res) => {
     try {
         const user = await Users.findOne({
             where: { email: req.body.email }
+<<<<<<< HEAD
         })
+=======
+        });
+>>>>>>> 1bf731d375c271c00251dda9693510d2a35b7d59
 
         if (!user) return res.status(400).json({message: 'Credentials not valid.'}); // 400 - Bad Request
         // Instance methog defined in '/models/Users'
@@ -207,13 +211,13 @@ router.post('/login', async (req, res) => {
             req.session.userId = user.id;
             req.session.loggedIn = true;
             res.status(200).json(user); // 200 = Ok
-        })
+        });
     } catch (error) {
         console.log(error);
         res.status(500).json(error); // 500 - Internal error
     }
 
-})
+});
 
 // Route to logout an existing user
 // POST method with endpoint '/api/users/logout'

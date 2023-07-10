@@ -1,4 +1,5 @@
 :root {
+<<<<<<< HEAD
 	--roboto: sans-serif;
 	--monoton: cursive;
 	--dark: #00061c;
@@ -8,10 +9,19 @@
 	--red: #c30356;
 	--fuchsia: #d63384;
 	--light: #dff3f8;
+=======
+    --roboto: 'Roboto', sans-serif;
+    --monoton: 'Monoton', cursive;
+    --dark: #2b2d42;
+    --mediumgray: #8D99AE;
+    --lightgray: #EDF2F4;
+    --red: #D90429;
+>>>>>>> 1bf731d375c271c00251dda9693510d2a35b7d59
 }
 
 /* main.handlebars */
 body {
+<<<<<<< HEAD
 	background-color: var(--dark);
 	color: var(--blue);
 	font-family: var(--roboto);
@@ -48,3 +58,26 @@ footer {
 	color: var(--turquoise);
 }
 
+=======
+    background-color: var(--lightgray);
+    color: var(--dark);
+    font-family: var(--roboto);
+    background-image: url(../assets/bg.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+footer {
+    /* push footer to the bottom of the page */
+    margin-top: auto;
+}
+
+.navbar-custom .navbar-brand {
+    font-family: var(--monoton);
+    color: var(--dark);
+}
+
+.navbar-custom .navbar-brand:hover {
+    color: var(--red);
+}
+>>>>>>> 1bf731d375c271c00251dda9693510d2a35b7d59
