@@ -194,11 +194,7 @@ router.post('/login', async (req, res) => {
     try {
         const user = await Users.findOne({
             where: { email: req.body.email }
-<<<<<<< HEAD
-        })
-=======
         });
->>>>>>> 1bf731d375c271c00251dda9693510d2a35b7d59
 
         if (!user) return res.status(400).json({message: 'Credentials not valid.'}); // 400 - Bad Request
         // Instance methog defined in '/models/Users'

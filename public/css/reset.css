@@ -1,17 +1,11 @@
-<<<<<<< HEAD
 /* Resets the box size of every element */
-=======
->>>>>>> 1bf731d375c271c00251dda9693510d2a35b7d59
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
   }
   
-<<<<<<< HEAD
   /* Gives the body element a parent height to compare against */
-=======
->>>>>>> 1bf731d375c271c00251dda9693510d2a35b7d59
   html {
     height: 100%;
   }
@@ -26,28 +20,18 @@
     font-size: 100%;
   }
   
-<<<<<<< HEAD
   /* Matches the font of special elements to the rest of the page */
-=======
->>>>>>> 1bf731d375c271c00251dda9693510d2a35b7d59
   input, select, option, optgroup, textarea, button,
   pre, code {
     font-size: 100%;
     font-family: inherit;
   }
   
-<<<<<<< HEAD
   /* Removes default bullet points from lists */
   ol, ul {
     list-style: none;
   }
   
-=======
-  ol, ul {
-    list-style: none;
-  }
-
->>>>>>> 1bf731d375c271c00251dda9693510d2a35b7d59
   a {
     text-decoration: none;
   }
