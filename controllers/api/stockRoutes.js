@@ -33,7 +33,7 @@ router.post('/', async (req, res) => {
     const result = await axios.get(requestUrl)
 
     const stockInfo = result.data.results[0]
-    console.log(stockInfo)
+    // console.log(stockInfo)
     res.end()
   
     // ********** Polygon API **************

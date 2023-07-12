@@ -13,11 +13,11 @@ Stocks.init(
             primaryKey: true,
             autoIncrement: false
         },
-        company: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            unique: true
-        },
+        // company: {
+        //     type: DataTypes.STRING,
+        //     allowNull: false,
+        //     unique: true
+        // },
         open: {
             type: DataTypes.FLOAT,
             allowNull: false,

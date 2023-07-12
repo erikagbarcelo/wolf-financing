@@ -49,24 +49,16 @@ const sess = {
 // Mount session middleware
 app.use(session(sess));
 
-<<<<<<< HEAD
 // Mount handlebars as the default template engine
-=======
-// Mount hdbs as the default template engine
->>>>>>> 1bf731d375c271c00251dda9693510d2a35b7d59
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 
 // set up middleware to parse requests
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
-<<<<<<< HEAD
 
 // Mount static middleware from the current working directory
 app.use(express.static(path.join(__dirname, 'public')))
-=======
-app.use(express.static(path.join(__dirname, 'public')));
->>>>>>> 1bf731d375c271c00251dda9693510d2a35b7d59
 
 // mount the routes
 app.use(routes);
@@ -76,6 +68,5 @@ express server */
 sequelize.sync({force: false}).then(() => {
     app.listen(PORT, () => {
         console.log(`App listening on port http://localhost:${PORT}`)
-
     })
 });
