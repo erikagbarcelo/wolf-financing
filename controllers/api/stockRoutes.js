@@ -24,6 +24,7 @@ router.post('/', async (req, res) => {
     const ticker = req.body.ticker; 
     console.log(ticker)
     // To sample of data pulled
+    // curl https://api.tiingo.com/tiingo/daily/GM/prices?token=4f7127b3a6f121dfd9506fba4b21a6ddf077b2ed
     // curl https://api.polygon.io/v2/aggs/ticker/F/range/1/day/2023-01-09/2023-01-09?apiKey=gtCLIGpsLEVTMKeT4XV9rZcX7ivq3M79
     const requestUrl = `https://api.polygon.io/v2/aggs/ticker/${ticker}/range/1/day/2023-01-09/2023-01-09?apiKey=${API_KEY}`;
     // const requestUrl = `https://api.polygon.io/v3/reference/exchanges?asset_class=stocks&locale=us&apiKey=${API_KEY}`;
@@ -32,7 +33,7 @@ router.post('/', async (req, res) => {
     const result = await axios.get(requestUrl)
 
     const stockInfo = result.data.results[0]
-    console.log(stockInfo)
+    // console.log(stockInfo)
     res.end()
   
     // ********** Polygon API **************

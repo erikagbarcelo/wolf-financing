@@ -6,7 +6,6 @@ class VestedStocks extends Model {}
 VestedStocks.init(
     {
         // List of fields
-
         vestedId: {
             type: DataTypes.INTEGER,
             allowNull: false,

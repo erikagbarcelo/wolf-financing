@@ -1,4 +1,4 @@
-const {Model, DataTypes} = require('sequelize');
+const {Model, DataTypes, STRING} = require('sequelize');
 const sequelize = require('../config/connection');
 
 class Stocks extends Model {}
@@ -13,6 +13,11 @@ Stocks.init(
             primaryKey: true,
             autoIncrement: false
         },
+        // company: {
+        //     type: DataTypes.STRING,
+        //     allowNull: false,
+        //     unique: true
+        // },
         open: {
             type: DataTypes.FLOAT,
             allowNull: false,

@@ -10,12 +10,7 @@ Route to signup a new ueser
 Post method with endpoint '/api/users/'
 Test with: {"username": "testUser",
             "password": "Password123",
-            "firstName": "Rodney",
-            "lastName": "Buller",
-            "address": "123 Radiator Springs",
-            "city": "Scottsdale",
-            "state": "Arizona",
-            "zip": "85251"}
+            "email": "rbuller@hotmail.com"}
 */
 router.post('/', async (req, res) => {
     // console.log('req.body:', req.body)
@@ -23,12 +18,7 @@ router.post('/', async (req, res) => {
         const newUser = await Users.create({
             email: req.body.email,
             password: req.body.password,
-            firstName: req.body.firstName,
-            lastName: req.body.lastName,
-            address: req.body.address,
-            city: req.body.city,
-            state: req.body.state,
-            zip: req.body.zip,
+            email: req.body.email,
         });
         // save new session to database
         req.session.save(() => {
@@ -128,12 +118,7 @@ PUT method with endpoint '/api/users/profile'
 test with any and all of:
 {"username": "updatedTestUser",
 "password": "updatedPassword123",
-"firstName": "Rodney",
-"lastName": "Buller",
-"address": "123 Radiator Springs",
-"city": "Scottsdale",
-"state": "Arizona",
-"zip": "85251"}
+"email": "rbuller@yahoo.com"}
 */
 // TODO: Ask why this worked with updating just the username. Ref tech-blog-v1.0, pt3 timestamp 35:30min
 router.put('/profile', withAuth, async (req, res) => {

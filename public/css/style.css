@@ -1,32 +1,50 @@
 :root {
-    --roboto: 'Roboto', sans-serif;
-    --monoton: 'Monoton', cursive;
-    --dark: #2b2d42;
-    --mediumgray: #8D99AE;
-    --lightgray: #EDF2F4;
-    --red: #D90429;
+	--roboto: sans-serif;
+	--monoton: cursive;
+	--dark: #00061c;
+	--midnight: #012873;
+	--blue: #000000;
+	--turquoise: #0bcad4;
+	--red: #c30356;
+	--fuchsia: #d63384;
+	--light: #dff3f8;
 }
 
 /* main.handlebars */
 body {
-    background-color: var(--lightgray);
-    color: var(--dark);
-    font-family: var(--roboto);
-    background-image: url(../assets/bg.jpg);
-    background-size: cover;
-    background-repeat: no-repeat;
+	background-color: var(--dark);
+	color: var(--blue);
+	font-family: var(--roboto);
+	background-image: url(../assets/wall_bg.jpg);
+	background-position: right;
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+
+.wrapper {
+	margin-right: 10vw;
+	margin-left: 5vw;
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
 }
 
 footer {
-    /* push footer to the bottom of the page */
-    margin-top: auto;
+	/* push footer to the bottom of the page */
+	margin-top: auto;
+}
+
+.navbar-custom .nav-link {
+	font-family: var(--roboto);
+	color: var(--blue);
 }
 
 .navbar-custom .navbar-brand {
-    font-family: var(--monoton);
-    color: var(--dark);
+	font-family: var(--monoton);
+	color: var(--blue);
 }
 
 .navbar-custom .navbar-brand:hover {
-    color: var(--red);
+	color: var(--turquoise);
 }
+
