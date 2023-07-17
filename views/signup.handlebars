@@ -1,29 +1,27 @@
 <form id='signup-form'>
 	<div class='mb-3'>
-		<label for='username' class='form-label'>Username</label>
-		<input type='text' class='form-control' id='username' />
+		<label for='username' class='visually-hidden form-label'>Username</label>
+		<input type='text' class='form-control' id='username' placeholder="Username"/>
 	</div>
 	<div class='mb-3'>
-		<label for='user-email' class='form-label'>Email address</label>
+		<label for='user-email' class='visually-hidden form-label'>Email address</label>
 		<input
 			type='email'
 			class='form-control'
 			id='user-email'
 			aria-describedby='emailHelp'
+			placeholder="Email Address"
 		/>
-		<div id='emailHelp' class='form-text'>We'll never share your email with
+		<div id='emailHelp' class='form-text fw-bolder text-dark'>We'll never share your email with
 			anyone else.</div>
 	</div>
 	<div class='mb-3'>
-		<label for='user-password' class='form-label'>Password</label>
-		<input type='password' class='form-control' id='user-password' />
+		<label for='user-password' class='visually-hidden form-label'>Password</label>
+		<input type='password' class='form-control' id='user-password' placeholder="Password"/>
 	</div>
-	{{! <div class='mb-3 form-check'>
-		<input type='checkbox' class='form-check-input' id='exampleCheck1' />
-		<label class='form-check-label' for='exampleCheck1'>Check me out</label>
-	</div> }}
 	<button type='submit' class='btn btn-primary'>Submit</button>
-	<a href='/login'>Login instead</a>
+	{{!-- <button type='button' class='btn btn-primary' formaction="/login">Login instead</button> --}}
+	<a class='nav-link text-light button' href='/login'>Login instead</a>
 </form>
 
 <script src='./js/signup.js'></script>

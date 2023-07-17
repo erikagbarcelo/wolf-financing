@@ -1,0 +1,28 @@
+<form class="row row-cols-lg-auto g-3 align-items-center" id="shareInput">
+  <div class="col-12">
+    <label class="visually-hidden" for="ticker">Stock Ticker</label>
+    <input type="text" class="form-control" id="ticker" placeholder="Stock Ticker">
+  </div>
+
+  <div class="col-12">
+    <label class="visually-hidden" for="nShares">Number of Shares</label>
+    <input type="text" class="form-control" id="nShares" placeholder="Number of Shares">
+  </div>
+
+  <div class="col-12">
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </div>
+</form>
+
+<hr>
+
+<ul class='list-group'>
+	{{#each stocks}}
+		<li class='list-group-item'>
+			<div class=''>
+				{{stockTicker}} - Purchase by <span class="fst-italic">{{user.username}}</span> on {{format_date createdAt}}
+			</div>
+
+		</li>
+	{{/each}}
+</ul>
