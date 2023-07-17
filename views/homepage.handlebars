@@ -1,15 +1,8 @@
 <ul class='list-group'>
-	{{#each posts}}
+	{{#each stocks}}
 		<li class='list-group-item'>
 			<div class=''>
-				<a href='/post/{{id}}' class='fw-bold'>{{title}}</a>
-				- created by
-				<span class='fst-italic'>{{user.username}}</span>
-				on
-				{{format_date createdAt}}
-				<span
-					class="'badge rounded-pill bg-warning px-2 py-1"
-				>{{commentsCount}}</span>
+				{{stockTicker}} - Purchase by <span class="fst-italic">{{user.username}}</span> on {{format_date createdAt}}
 			</div>
 
 		</li>

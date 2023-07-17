@@ -1,51 +1,31 @@
 const router = require('express').Router();
 const sequelize = require('../../config/connection');
-const { Users, Stocks } = require('../../models');
+const { VestedStocks, Users, Stocks } = require('../../models');
 
 // *** This should be vestedStocks. Will use seed file with stocks for now. ***
 // Render homepage with all existing stocks
 router.get('/', async (req, res) => {
     try {
-        const stocks = await Stocks.findAll({
-            /* FIXME
-            include: [{  model: Users, attributes: ['username']}],
-            attributes: {
-                include: [
-                    // Use plain SQL to get a count of the number of stocks for each user.
-                    [
-                        // TODO: Will need to finish the database architecture.
-                        sequelize.literal(
-                            '(SELECT COUNT(*) FROM vestedStocks WHERE vestedStocks.nShares = Users.id'
-                        ),
-                        // TODO: Title of the queury/column.
-                        'stocksCount',
-                    ]
-                ]
-            }
-            */
-        });
-
-        // To Clean up data retrieved in the console.log
+		// retrieve all existing comments from the database
+		let vStocks = await VestedStocks.findAll({
+			include: [ Stocks, Users ],
+		});
         // Reference Serilized Data tech-blog-v1.0, pt2 timestamp 2:30min
-        /*
-        const serializedStocks = [];
-        for (i = 0 ; i < stocks.length; i++) {
-            const serializedStock = stocks[i].get({ plain: true}); 
-            serializedStocks.push(serializedStock);
-        }
-        */
+        // const serializedStocks = []
+        // for (let i=0; i < vStocks.length; i++) {
+        //     const serializedStock = vStocks[i].get({ plain: true });
+        //     serializedStocks.push(serializedStock);
+        // }
         // Reference Serilized Data tech-blog-v1.0, pt2 timestamp 2:40min
-        
-        const serializedStocks = stocks.map(stock => stock.get({ plain: true }));
-        
-        console.log(serializedStocks);
+        const serializedStocks = vStocks.map((stock) => stock.get({ plain: true }));
+        console.log(serializedStocks)
 
-        // TODO: Modify response with actual View Template
-        res.status(200).render('homepage', { stocks: serializedStocks, loggedIn: req.session.loggedIn })
-    } catch (error) {
-        console.log(error);
-        res.status(500).json(error);
-    }
+		res.status(200).render('homepage', { stocks: serializedStocks, loggedIn: req.session.loggedIn })
+        // res.status(200).send('<h1>Individual Share Info</h1><h2>Render for the Individual Share view along with all data for share.</h2>')
+	} catch (error) {
+		console.log(error);
+		res.status(500).json(error); // 500 - Internal Server Error
+	}
 });
 
 // Render Individual Share Info
@@ -83,5 +63,10 @@ router.get('/login', async (req, res) => {
 	if (req.session.loggedIn) return res.status(200).redirect('/');
 	res.status(200).render('login');
 })
+
+// router.get('/mystocks', async (req, res) => {
+// 	if (req.session.loggedIn) return res.status(200).redirect('/');
+// 	res.status(200).render('mystocks');
+// })
 
 module.exports = router;

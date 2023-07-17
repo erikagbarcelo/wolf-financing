@@ -14,11 +14,12 @@ Test with: {"username": "testUser",
 */
 router.post('/', async (req, res) => {
     // console.log('req.body:', req.body)
+    // TODO: Check to see if user already exist. Provide clear error statement if user exist
     try {
         const newUser = await Users.create({
+            username: req.body.username,
             email: req.body.email,
             password: req.body.password,
-            email: req.body.email,
         });
         // save new session to database
         req.session.save(() => {
@@ -120,7 +121,7 @@ test with any and all of:
 "password": "updatedPassword123",
 "email": "rbuller@yahoo.com"}
 */
-// TODO: Ask why this worked with updating just the username. Ref tech-blog-v1.0, pt3 timestamp 35:30min
+// Ref tech-blog-v1.0, pt3 timestamp 35:30min
 router.put('/profile', withAuth, async (req, res) => {
     try {
         // Pass in req.body to only update what's sent over by the  client
@@ -133,7 +134,7 @@ router.put('/profile', withAuth, async (req, res) => {
 
         if (!updatedUser[0]) return res.status(404).json({message: 'No User Found.'}); // 404 - Not Found
 
-        console.log(updatedUser);
+        // console.log(updatedUser);
         res.status(202).json(updatedUser); // 202 - Accepted
     }  catch (error) {
         console.log(error);
@@ -178,7 +179,7 @@ router.delete('/:userId', async (req, res) => {
 
         if (!deletedUser[0]) return res.status(404).json({message: 'No User Found.'}); // 404 - Not Found
 
-        console.log(deletedUser);
+        // console.log(deletedUser);
         res.status(202).json(deletedUser); // 202 - Accepted
     }   catch (error) {
         console.log(error);
@@ -193,7 +194,7 @@ router.delete('/:userId', async (req, res) => {
 router.post('/login', async (req, res) => {
     try {
         const user = await Users.findOne({
-            where: { email: req.body.email }
+            where: { username: req.body.username }
         });
 
         if (!user) return res.status(400).json({message: 'Credentials not valid.'}); // 400 - Bad Request

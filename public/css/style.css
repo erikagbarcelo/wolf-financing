@@ -1,9 +1,9 @@
 :root {
-	--roboto: sans-serif;
-	--monoton: cursive;
+	--sansSerif: sans-serif;
+	--cursive: cursive;
 	--dark: #00061c;
 	--midnight: #012873;
-	--blue: #000000;
+	--black: #000000;
 	--turquoise: #0bcad4;
 	--red: #c30356;
 	--fuchsia: #d63384;
@@ -14,12 +14,24 @@
 body {
 	background-color: var(--dark);
 	color: var(--blue);
-	font-family: var(--roboto);
+	font-family: var(--sansSerif);
 	background-image: url(../assets/wall_bg.jpg);
 	background-position: right;
 	background-size: cover;
 	background-repeat: no-repeat;
 }
+
+.button {
+	background-color: #0d6efd;
+	border: none;
+	border-radius: 3px;
+	padding: 10px 10px;
+	text-align: center;
+	display: inline-block;
+	font-size: 15px;
+	margin: 4px 2px;
+	cursor: pointer;
+  }
 
 .wrapper {
 	margin-right: 10vw;
@@ -35,13 +47,13 @@ footer {
 }
 
 .navbar-custom .nav-link {
-	font-family: var(--roboto);
-	color: var(--blue);
+	font-family: var(--sansSerif);
+	color: var(--black);
 }
 
 .navbar-custom .navbar-brand {
-	font-family: var(--monoton);
-	color: var(--blue);
+	font-family: var(--cursive);
+	color: var(--black);
 }
 
 .navbar-custom .navbar-brand:hover {
