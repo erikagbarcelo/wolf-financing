@@ -2,7 +2,8 @@
 Stock and investements tracking
 
 ## Application Image
-(Screenshot)
+![image](https://github.com/erikagbarcelo/wolf-financing/assets/127817267/53e97746-d298-4c60-82fc-ba2244539d32)
+
 
 ## Description 
 This project will create a database which will collect from a third-party API and track an individual's contribution with respect to time. The database will calculate the growth of shares and dividens earned.
@@ -17,8 +18,8 @@ Once pulled from the repository install all required packages by using the "npm 
 Once everything is setup, type npm run dev in order to initialize the script. 
     
 ## Technologies Used
--
--
--
+- Node.js
+- MySQL
+- Bootstrap
 
 ## Link to App
