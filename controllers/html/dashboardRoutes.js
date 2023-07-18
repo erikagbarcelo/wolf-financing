@@ -1,12 +1,12 @@
 const router = require('express').Router();
-
+const withAuth = require('../../utils/auth')
 const sequelize = require('../../config/connection');
 const { VestedStocks, Users, Stocks } = require('../../models');
 
 // Render dashboard with stocks purchased by users pt2 timestamp 2:58min
 // TODO: Only authenticated users can access their dashboard
 // TODO: Once we have set up our session remove our ':userId' from endpoint and get userId from req.sessions instead
-router.get('/req.session.userId', async (req, res) => {
+router.get('/', withAuth, async (req, res) => {
         try {
 		// retrieve all existing comments from the database
 		let vStocks = await VestedStocks.findAll({
@@ -30,11 +30,6 @@ router.get('/req.session.userId', async (req, res) => {
 		res.status(500).json(error); // 500 - Internal Server Error
 	}        
 
-})
-
-router.get('/mystocks/req.session.userId', async (req, res) => {
-	if (req.session.loggedIn) return res.status(200).redirect('/');
-	res.status(200).render('mystocks');
 })
 
 module.exports = router;
